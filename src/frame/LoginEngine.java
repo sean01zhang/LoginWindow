@@ -49,14 +49,13 @@ public class LoginEngine {
 
     /**
      * The isUser method finds out if a user with that username already exists.
-     * If so, then it return which line it is located. If not, then it will
-     * return -1.
+     * If so, then it return true. Otherwise, it will return false
      *
      * @param user the username that it is trying to find.
-     * @return the index where it is located, or -1 if it cannot find it.
+     * @return true or false depending on if the user exists.
      */
     public static Boolean isUser(String user) {   //goes through the file as a string array
-        return (FILEIO.findAndReturn("login.txt", user, 3, User.delim) == null);
+        return (FILEIO.findAndReturn("login.txt", user, 3, User.delim) != null);
     }
 
     /**
@@ -86,6 +85,15 @@ public class LoginEngine {
         }
         //defaults to false otherwise
         return false;
+    }
+    
+    /**
+     * Gets the user from memory
+     * @return 
+     */
+    public User getUser() {
+        //returns the user loaded.
+        return u;
     }
 
 }

@@ -682,12 +682,11 @@ public class Launcher extends javax.swing.JFrame {
      */
     public void loginU(String uName) {
         try {
-            if (LoginEngine.isUser((uName)) != -1) {
+            if (LoginEngine.isUser((uName))) {
                 passcodePanel.setVisible(true);
                 signinUNamePanel.setVisible(false);
                 signUpPanel.setVisible(false);
                 userPanel.setVisible(false);
-                l.loadUser(uName);
                 nameLabel.setText(((l.getUser().getfName())) + " " + ((l.getUser().getlName())));
                 uNameLabel.setText(uName);
                 warnLabel.setText("");
@@ -727,7 +726,7 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonSignUpMouseClicked
 
     private void loginP() {
-        if (LoginEngine.isPass(uNameLabel.getText(), new String(passCodeField.getPassword())) != -1) {
+        if (l.loadUser(uNameTxtField.getText(), new String(passCodeField.getPassword()))) {
             userPanel.setVisible(true);
             passcodePanel.setVisible(false);
             signinUNamePanel.setVisible(false);
@@ -883,7 +882,7 @@ public class Launcher extends javax.swing.JFrame {
 
         //if duplicate user
         try {
-            if (LoginEngine.isUser(uNameTxtField.getText()) != -1) {
+            if (LoginEngine.isUser(uNameTxtField.getText())) {
                 //prompt user that there is already a user existing with that username
                 JOptionPane.showMessageDialog(this, "A user already exists with this username. Try Again.");
                 passPField.setText("");
