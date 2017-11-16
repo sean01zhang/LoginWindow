@@ -58,15 +58,15 @@ public class FILEIO {
     }
 
     /**
-     * Finds where the given string resides in the file in terms of lines.
+     * Finds where the given string resides in the file and returns that string.
      *
      * @param fName the file name of the thing
-     * @param s
-     * @param detail
-     * @param delim
+     * @param s the name of the string that you are trying to find
+     * @param detail the specific detail: 0) First Name 1) Last Name 2) Username.. etc
+     * @param delim the delimiter to split the line
      * @return
      */
-    public static int find(String fName, String s, int detail, String delim) {
+    public static String[] findAndReturn(String fName, String s, int detail, String delim) {
         //creates a new instance of file with the given path of the file.
         File f = new File("src/Res/" + fName);
         //creates a scanner variable
@@ -81,17 +81,19 @@ public class FILEIO {
             //adds every line of the file into the output string.
             while (input.hasNext()) {
                 count++;
-                if (s.equals(input.nextLine().split(delim)[detail])) {
+                String[] s2 = input.nextLine().split(delim);
+                if (s.equals(s2[detail])) {
+                    
                     //closes the scanner
                     input.close();
-                    return count;
+                    return s2;
                 }
             }
 
         } catch (FileNotFoundException ex) {
         }
 
-        return -1;
+        return null;
     }
 
     /**
@@ -102,42 +104,6 @@ public class FILEIO {
     public static void printF(String fName) {
         //creates a new file in the Res (resources) folder.
         File f = new File("src/Res/" + fName);
-    }
-
-    /**
-     * Gets the file as a string.
-     *
-     * @param fName the filename of the file.
-     * @return the file as a String array
-     */
-    public static String getStrFromF(String fName, int index) {
-        //creates a new instance of file with the given path of the file.
-        File f = new File("src/Res/" + fName);
-        //creates a scanner variable
-        Scanner input;
-        //creates an output variable
-        String out = "";
-
-        //catches exceptions related to FileNotFoundException
-        try {
-            //creates a new instance of Scanner in the input variable
-            input = new Scanner(f);
-
-            for (int i = 0; i <= index; i++) {
-                if (i == index) {
-                    return input.nextLine();
-                } else {
-                    input.nextLine();
-                }
-            }
-
-            //closes the scanner
-            input.close();
-        } catch (FileNotFoundException ex) {
-        }
-
-        //returns the output string
-        return null;
     }
 
     /**
