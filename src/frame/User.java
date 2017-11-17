@@ -97,7 +97,7 @@ public class User {
     /**
      * 
      */
-    public static String delim = " ";
+    public static String delim = "SEANIZKEWLLOLOLOLOLOLOLOL";
     
     public String toString() {
         return (getfName() + delim + getlName() + delim + getuName() + delim + getPass() + delim + getProfileURL());

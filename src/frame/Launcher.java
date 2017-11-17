@@ -682,7 +682,8 @@ public class Launcher extends javax.swing.JFrame {
      */
     public void loginU(String uName) {
         try {
-            if (LoginEngine.isUser((uName))) {
+            if (l.isUser((uName))) {
+
                 passcodePanel.setVisible(true);
                 signinUNamePanel.setVisible(false);
                 signUpPanel.setVisible(false);
@@ -726,7 +727,7 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonSignUpMouseClicked
 
     private void loginP() {
-        if (l.loadUser(uNameTxtField.getText(), new String(passCodeField.getPassword()))) {
+        if (l.loadUser(uNameTxtField.getText(), (new String(passCodeField.getPassword())))) {
             userPanel.setVisible(true);
             passcodePanel.setVisible(false);
             signinUNamePanel.setVisible(false);
@@ -741,6 +742,7 @@ public class Launcher extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect Password");
+
         }
     }
 
@@ -815,6 +817,7 @@ public class Launcher extends javax.swing.JFrame {
 
     /**
      * Signs out the user.
+     *
      * @param evt the mouse event
      */
     private void signOutButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signOutButtonMousePressed
@@ -882,7 +885,7 @@ public class Launcher extends javax.swing.JFrame {
 
         //if duplicate user
         try {
-            if (LoginEngine.isUser(uNameTxtField.getText())) {
+            if (l.isUser(uNameTxtField.getText())) {
                 //prompt user that there is already a user existing with that username
                 JOptionPane.showMessageDialog(this, "A user already exists with this username. Try Again.");
                 passPField.setText("");

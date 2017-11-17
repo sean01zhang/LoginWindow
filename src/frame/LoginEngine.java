@@ -54,8 +54,16 @@ public class LoginEngine {
      * @param user the username that it is trying to find.
      * @return true or false depending on if the user exists.
      */
-    public static Boolean isUser(String user) {   //goes through the file as a string array
-        return (FILEIO.findAndReturn("login.txt", user, 3, User.delim) != null);
+    public Boolean isUser(String user) {   //goes through the file as a string array
+        String[] s =FILEIO.findAndReturn("login.txt", user, 2, User.delim);
+        if (s==null) {
+            return false;
+        } else {
+            u = new User(s);
+            return true;
+        }
+        
+        
     }
 
     /**
@@ -66,14 +74,14 @@ public class LoginEngine {
      */
     public boolean loadUser(String user, String pass) {
         //find user
-        String[] s = FILEIO.findAndReturn("login.txt", user, 3, User.delim);
+        String[] s = FILEIO.findAndReturn("login.txt", user, 2, User.delim);
 
         try 
         {
             //checks if the password is correct
-            if (s[4].equals(FILEIO.encrypt(pass))) 
+            System.out.println(FILEIO.encrypt(pass));
+            if (s[3].equals(FILEIO.encrypt(pass))) 
             {
-                u = new User(s);
                 return true;
             }
             else 
