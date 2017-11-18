@@ -502,6 +502,8 @@ public class Launcher extends javax.swing.JFrame {
 
         loginPanel.add(passcodePanel, "card4");
 
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         lNameLabel.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
         lNameLabel.setText("Zhang");
 

@@ -74,13 +74,13 @@ public class LoginEngine {
      */
     public boolean loadUser(String user, String pass) {
         //find user
-        String[] s = FILEIO.findAndReturn("login.txt", user, 2, User.delim);
+        //String[] s = FILEIO.findAndReturn("login.txt", user, 2, User.delim);
 
         try 
         {
             //checks if the password is correct
             System.out.println(FILEIO.encrypt(pass));
-            if (s[3].equals(FILEIO.encrypt(pass))) 
+            if (u.getPass().equals(FILEIO.encrypt(pass))) 
             {
                 return true;
             }
