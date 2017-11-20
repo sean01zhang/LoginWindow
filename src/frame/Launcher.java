@@ -5,15 +5,12 @@
  */
 package frame;
 
-import Util.FILEIO;
 import Util.IMAGE;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
