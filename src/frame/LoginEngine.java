@@ -54,40 +54,32 @@ public class LoginEngine {
      * @param user the username that it is trying to find.
      * @return true or false depending on if the user exists.
      */
-    public Boolean isUser(String user) {   //goes through the file as a string array
+    public Boolean isUser(String user) 
+    {   //goes through the file as a string array
+        //finds the line that the username exists. Returns null if the user does not exist.
         String[] s =FILEIO.findAndReturn("login.txt", user, 2, User.delim);
-        if (s==null) {
-            return false;
-        } else {
+        
+        //If it does not exist, return null.
+        if (s==null) 
+        {   return false;
+        } //If it does exist, return true.
+        else 
+        {   //create a new instance of user with the details of the user on that line.
             u = new User(s);
             return true;
         }
-        
-        
-    }
+    } 
 
     /**
-     * Loads the user into memory 
-     * @param user the username of the user you want to load
+     * Checks if the password given in the argument is equal to the password in the instance of the user class.
      * @param pass the password of the user you want to load.
      * @return true or false depending whether or not the login details matched the database.
      */
-    public boolean loadUser(String user, String pass) {
-        //find user
-        //String[] s = FILEIO.findAndReturn("login.txt", user, 2, User.delim);
-
+    public boolean isPass(String pass) {
         try 
         {
             //checks if the password is correct
-            System.out.println(FILEIO.encrypt(pass));
-            if (u.getPass().equals(FILEIO.encrypt(pass))) 
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return (u.getPass().equals(FILEIO.encrypt(pass)));
         } catch (Exception ex) 
         { //nothing here
         }
@@ -97,7 +89,7 @@ public class LoginEngine {
     
     /**
      * Gets the user from memory
-     * @return 
+     * @return the instance of user that is stored in this instance of LoginEngine.
      */
     public User getUser() {
         //returns the user loaded.

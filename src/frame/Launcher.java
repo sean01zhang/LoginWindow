@@ -26,11 +26,16 @@ public class Launcher extends javax.swing.JFrame {
     /**
      * Creates new form launcher
      */
+    
+    //creates a loginEngine variable.
     public LoginEngine l;
 
+    /**
+     * The constructor initializes the graphical components
+     */
     public Launcher() {
         initComponents();
-        //makes the textfield transparent and white
+        //makes the textfields transparent
         userTextField.setOpaque(false);
         fNameTxtField.setOpaque(false);
         lNameTxtField.setOpaque(false);
@@ -38,8 +43,8 @@ public class Launcher extends javax.swing.JFrame {
         passConfirmPField.setOpaque(false);
         passPField.setOpaque(false);
         imgURLTxtField.setOpaque(false);
+        //creates an instance of loginEngine.
         l = new LoginEngine();
-
     }
 
     /**
@@ -604,8 +609,11 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the focus event
      */
     private void userTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userTextFieldFocusGained
+        //refreshes the gif
         in.getImage().flush();
+        //changes the icon
         underline.setIcon(in);
+        //changes the text to blue when focused.
         promptLabel.setForeground(new Color(0, 114, 255));
     }//GEN-LAST:event_userTextFieldFocusGained
 
@@ -616,8 +624,11 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the focus event
      */
     private void userTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userTextFieldFocusLost
+        //refreshes the gif
         out.getImage().flush();
+        //changes the icon
         underline.setIcon(out);
+        //changes the text to gray when not focused.
         promptLabel.setForeground(new Color(61, 61, 61));
     }//GEN-LAST:event_userTextFieldFocusLost
 
@@ -627,6 +638,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the mouse event
      */
     private void loginPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginPanelMousePressed
+        //changes focus from other component to login panel
         this.requestFocusInWindow();
     }//GEN-LAST:event_loginPanelMousePressed
 
@@ -637,6 +649,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt
      */
     private void bgPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgPanelMousePressed
+        //changes focus from other component to background panel.
         this.requestFocusInWindow();
     }//GEN-LAST:event_bgPanelMousePressed
 
@@ -650,6 +663,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the mouse event
      */
     private void nextButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButtonMousePressed
+        //set icon to depressed state picture.
         nextButton.setIcon(nextButtonDep);
         //do login stuff
         loginU(userTextField.getText());
@@ -661,17 +675,20 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the mouse event
      */
     private void nextButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButtonMouseReleased
+        //set icon to normal state.
         nextButton.setIcon(nextButtonND);
     }//GEN-LAST:event_nextButtonMouseReleased
 
     /**
-     *
-     * @param evt
+     * This method is called when the user presses a key in the text field. This is mainly to detect keystrokes and the enter key.
+     * @param evt The keyEvent.
      */
     private void userTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userTextFieldKeyPressed
+        //if the user presses enter, call login method.
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //do login stuff
             loginU(userTextField.getText());
+        //otherwise, clear the warning label, as the user is still typing.
         } else {
             warnLabel.setText("");
         }
@@ -683,9 +700,12 @@ public class Launcher extends javax.swing.JFrame {
      * @param uName the username that was provided
      */
     public void loginU(String uName) {
-        try {
-            if (l.isUser((uName))) {
-
+        try 
+        {
+            //if the given username is a user that exists in the database, initiate change in graphical components.
+            if (l.isUser((uName))) 
+            {
+                //change in graphical components.
                 passcodePanel.setVisible(true);
                 signinUNamePanel.setVisible(false);
                 signUpPanel.setVisible(false);
@@ -693,12 +713,14 @@ public class Launcher extends javax.swing.JFrame {
                 nameLabel.setText(((l.getUser().getfName())) + " " + ((l.getUser().getlName())));
                 uNameLabel.setText(uName);
                 warnLabel.setText("");
+                //sets the icon of the profile picture from the database
                 profileLabel.setIcon(new ImageIcon(IMAGE.getResizedImage(IMAGE.getBufferedImageURL(((l.getUser().getProfileURL()))), profileLabel.getWidth(), profileLabel.getHeight())));
-            } else {
+            } else 
+            {   //otherwise, prompt the user that this user does not exist.
                 warnLabel.setText("This user does not exist");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) 
+        {//nothing here.
         }
     }
 
@@ -720,6 +742,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt mouse event
      */
     private void backButtonSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonSignUpMouseClicked
+        //switches panels to the main login screen.
         signinUNamePanel.setVisible(true);
         signUpPanel.setVisible(false);
         userTextField.requestFocusInWindow();
@@ -728,36 +751,56 @@ public class Launcher extends javax.swing.JFrame {
         warnLabel.setText("");
     }//GEN-LAST:event_backButtonSignUpMouseClicked
 
+    /**
+     * This is the method responsible for handling password login.
+     */
     private void loginP() {
-        if (l.loadUser(uNameTxtField.getText(), (new String(passCodeField.getPassword())))) {
+        //if it is the correct password for the corresponding user, change graphical components to logged in window.
+        if (l.isPass((new String(passCodeField.getPassword())))) {
+            //switches panels in cardlayout
             userPanel.setVisible(true);
             passcodePanel.setVisible(false);
             signinUNamePanel.setVisible(false);
             signUpPanel.setVisible(false);
-
+            
+            //sets new graphical components.
             try {
                 fNameLabel1.setText((l.getUser().getfName()));
                 lNameLabel.setText((l.getUser().getlName()));
                 uNameLabelL.setText((l.getUser().getuName()));
                 profileLabel1.setIcon(new ImageIcon(IMAGE.getResizedImage(IMAGE.getBufferedImageURL(((l.getUser().getProfileURL()))), profileLabel1.getWidth(), profileLabel1.getHeight())));
             } catch (Exception ex) {
-            }
+            }//nothing here
         } else {
+            //otherwise, prompt user that password is incorrect.
             JOptionPane.showMessageDialog(this, "Incorrect Password");
-
         }
     }
 
+    /**
+     * This method is responsible for button actions 
+     * @param evt the mouse event.
+     */
     private void nextButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButton1MousePressed
+        //set image icon to depressed state.
         nextButton1.setIcon(nextButtonDep);
     }//GEN-LAST:event_nextButton1MousePressed
 
+    /**
+     * This method is responsible for button actions
+     * @param evt the mouse event.
+     */
     private void nextButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButton1MouseReleased
+        //set image icon to normal state.
         nextButton1.setIcon(nextButtonND);
         //calls login method
         loginP();
     }//GEN-LAST:event_nextButton1MouseReleased
 
+    /**
+     * This method is called when 
+     * @param evt 
+     */
     private void exitLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLoginMouseClicked
         // TODO add your handling code here:
         signUpPanel.setVisible(false);
