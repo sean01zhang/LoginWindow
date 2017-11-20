@@ -840,6 +840,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the key event.
      */
     private void passCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passCodeFieldKeyPressed
+        //calls login method when user presses enter.
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             loginP();
         }
@@ -851,6 +852,7 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the mouse event
      */
     private void nextButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextButton2MousePressed
+        //set icon to depressed.
         nextButton2.setIcon(nextButtonDep);
     }//GEN-LAST:event_nextButton2MousePressed
 
@@ -884,10 +886,12 @@ public class Launcher extends javax.swing.JFrame {
      * @param evt the mouse event
      */
     private void signOutButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signOutButtonMousePressed
+        //changes the graphical components.
         passcodePanel.setVisible(false);
         signinUNamePanel.setVisible(true);
         signUpPanel.setVisible(false);
         userPanel.setVisible(false);
+        //resets the text fields to blank
         resetTxtFields();
     }//GEN-LAST:event_signOutButtonMousePressed
 
@@ -906,9 +910,11 @@ public class Launcher extends javax.swing.JFrame {
             //clear password field
             passPField.setText("");
             passConfirmPField.setText("");
+            //the password is bad
             return true;
         }
 
+        //gets text for the password fields.
         String s1 = new String(passPField.getPassword());
         String s2 = new String(passConfirmPField.getPassword());
 
@@ -918,6 +924,7 @@ public class Launcher extends javax.swing.JFrame {
             //clear password field
             passPField.setText("");
             passConfirmPField.setText("");
+            //the password is bad
             return true;
         }
 
@@ -937,6 +944,7 @@ public class Launcher extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "This Password is too common. Try Again.");
                     passPField.setText("");
                     passConfirmPField.setText("");
+                    //the password is bad
                     return true;
                 }
             }
@@ -954,16 +962,21 @@ public class Launcher extends javax.swing.JFrame {
                 passPField.setText("");
                 passConfirmPField.setText("");
                 uNameTxtField.setText("");
+                //the password is bad
                 return true;
             }
         } catch (Exception ex) {
-        }
+        } //nothing here
 
+        //returns false when the password passes all the trials.
         return false;
-
     }
 
+    /**
+     * Resets all text fields.
+     */
     public void resetTxtFields() {
+        //sets these text fields to blank.
         userTextField.setText("");
         fNameTxtField.setText("");
         lNameTxtField.setText("");
