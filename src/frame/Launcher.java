@@ -798,29 +798,47 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_nextButton1MouseReleased
 
     /**
-     * This method is called when 
-     * @param evt 
+     * This method is called when the exit button is clicked
+     * @param evt the mouse event
      */
     private void exitLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLoginMouseClicked
-        // TODO add your handling code here:
+        //changes the graphical components back to the main login screen
         signUpPanel.setVisible(false);
         signinUNamePanel.setVisible(true);
         passcodePanel.setVisible(false);
         passCodeField.setText("");
     }//GEN-LAST:event_exitLoginMouseClicked
 
+    /**
+     * This method is called when the textfield gains focus.
+     * @param evt the focus event.
+     */
     private void passCodeFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passCodeFieldFocusGained
+        //refreshes the gif
         in.getImage().flush();
+        //sets the icon to blue line entrance gif.
         underline1.setIcon(in);
+        //sets the password label to blue
         promptLabel1.setForeground(new Color(0, 114, 255));
     }//GEN-LAST:event_passCodeFieldFocusGained
 
+    /**
+     * This method is called when the passcode field's focus is lost.
+     * @param evt the focus event.
+     */
     private void passCodeFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passCodeFieldFocusLost
+        //refreshes the gif.
         out.getImage().flush();
+        //sets the icon to exit gif sequence.
         underline1.setIcon(out);
+        //sets password label to gray.
         promptLabel1.setForeground(new Color(61, 61, 61));
     }//GEN-LAST:event_passCodeFieldFocusLost
 
+    /**
+     * This method is called when a key is pressed in the password field.
+     * @param evt the key event.
+     */
     private void passCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passCodeFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             loginP();
