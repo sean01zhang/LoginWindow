@@ -964,6 +964,17 @@ public class Launcher extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
         } //nothing here
+        
+        //if has a delimiter inside
+        if(uNameTxtField.getText().indexOf(User.delim)!=-1 ||fNameTxtField.getText().indexOf(User.delim)!=-1 ||
+           lNameTxtField.getText().indexOf(User.delim)!=-1 ||imgURLTxtField.getText().indexOf(User.delim)!=-1) 
+        {
+            //prompts user to enter text without a delimiter in it.
+            JOptionPane.showMessageDialog(this, "One of your text fields contain a delimiter. Try Again.");
+            resetTxtFields();
+            //password is bad
+            return true;
+        }
 
         //returns false when the password passes all the trials.
         return false;
